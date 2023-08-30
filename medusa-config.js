@@ -33,6 +33,10 @@ const DATABASE_URL =
 
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
+const JWT_SECRET = process.env.JWT_SECRET || ""
+
+const COOKIE_SECRET = process.env.COOKIE_SECRET || ""
+
 const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
@@ -78,16 +82,16 @@ const modules = {
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
-  jwtSecret: process.env.JWT_SECRET,
-  cookieSecret: process.env.COOKIE_SECRET,
-  store_cors: process.env.STORE_CORS,
-  database_url: process.env.DATABASE_URL,
-  admin_cors: process.env.ADMIN_CORS,
+  jwtSecret: JWT_SECRET,
+  cookieSecret: COOKIE_SECRET,
+  store_cors: STORE_CORS,
+  database_url: DATABASE_URL,
+  admin_cors: ADMIN_CORS,
   database_extra:
     process.env.NODE_ENV !== "development"
       ? { ssl: { rejectUnauthorized: false } }
       : {},
-  redis_url: process.env.REDIS_URL,
+  redis_url: REDIS_URL,
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule} */
